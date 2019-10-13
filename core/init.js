@@ -5,8 +5,17 @@ class InitManager { // 初始化管理器
     static initCore(app) { // 入口总方法
         InitManager.app = app
         InitManager.initLoadRouters()
+        InitManager.loadHttpException()
+        InitManager.loadConfig()
     }
 
+    static loadConfig(path = '') {
+        const configPath = path || `${process.cwd()}/config/config.js`
+        const config = require(configPath)
+        global.config = config
+    }
+
+    // 自动加载router
     static initLoadRouters() {
         const apiDirctory = `${process.cwd()}/app/api/v1` // 绝对路径
         requireDirectory(module, apiDirctory, {
@@ -20,6 +29,12 @@ class InitManager { // 初始化管理器
         }
 
     }
+
+    static loadHttpException() {
+        const errors = require('./http-exception')
+        global.errs = errors
+    }
+
 }
 
 module.exports = InitManager
