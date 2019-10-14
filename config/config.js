@@ -15,6 +15,6 @@ module.exports = {
         appId: 'wx80f38683fbccf188',
         appSecret: '399de50ef63b8b6e618cbba66cab98c3',
         // %s占位符
-        loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%sgrant_type=authorization_code'
+        loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
     }
 }
