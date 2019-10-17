@@ -1,6 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
-const { LoginType } = require('../lib/enum')
+const { LoginType, ClassicType } = require('../lib/enum')
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {
@@ -67,15 +67,25 @@ class TokenValidator extends LinValidator {
                 max: 128
             })
         ]
+        this.validateLoginType = checkType
     }
 
-    validateLoginType(vals) {
-        if (!vals.body.type) {
-            throw new Error('type是必须的')
-        }
-        if(!LoginType.isThisType(vals.body.type)) {
-            throw new Error('type参数不合法')
-        }
+    // validateLoginType(vals) {
+    //     if (!vals.body.type) {
+    //         throw new Error('type是必须的')
+    //     }
+    //     if (!LoginType.isThisType(vals.body.type)) {
+    //         throw new Error('type参数不合法')
+    //     }
+    // }
+}
+
+function checkType(vals) {
+    if (!vals.body.type) {
+        throw new Error('type是必须的')
+    }
+    if (!LoginType.isThisType(vals.body.type)) {
+        throw new Error('type参数不合法')
     }
 }
 
@@ -88,9 +98,71 @@ class NotEmptyValidator extends LinValidator {
     }
 }
 
+class LikeValidator extends PositiveIntegerValidator {
+    constructor() {
+        super()
+        const checker = new Checker(ClassicType)
+        this.validateType = checker.checkType.bind(checker)
+    }
+
+    // validateLoginType(vals) {
+    //     const type = vals.body.type || parseInt(vals.path.type)
+    //     if (!type) {
+    //         throw new Error('type是必须的')
+    //     }
+    //     if (!ClassicType.isThisType(type)) {
+    //         throw new Error('type参数不合法')
+    //     }
+    // }
+}
+
+class Checker {
+    constructor(type) {
+        this.checker = type
+    }
+    checkType(vals) {
+        const type = vals.body.type || parseInt(vals.path.type)
+        if (!type) {
+            throw new Error('type是必须的')
+        }
+        if (!this.checker.isThisType(type)) { // this指定如果不设置指定类
+            throw new Error('type参数不合法')
+        }
+    }
+}
+
+class SearchValidator extends LinValidator {
+    constructor() {
+        super()
+        this.q = [
+            new Rule('isLength', '搜索关键词不能为空', { min: 1, max: 32 })
+        ]
+        this.start = [
+            new Rule('isInt', 'start不符合规范', { min: 0, max: 60000 }),
+            new Rule('isOptional', '', 0)
+        ]
+        this.count = [
+            new Rule('isInt', 'count不符合规范', { min: 1, max: 50 }),
+            new Rule('isOptional', '', 20)
+        ]
+    }
+}
+
+class AddShortCommentValidator extends PositiveIntegerValidator {
+    constructor() {
+        super()
+        this.content = [
+            new Rule('isLength', '必须在1到12个字符之间', { min: 1, max: 12 })
+        ]
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
     TokenValidator,
-    NotEmptyValidator
+    NotEmptyValidator,
+    LikeValidator,
+    SearchValidator,
+    AddShortCommentValidator
 }

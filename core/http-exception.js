@@ -26,6 +26,15 @@ class Success extends HttpException {
     }
 }
 
+class HasError extends HttpException {
+    constructor(msg, errorCode) {
+        super()
+        this.code = 400
+        this.errorCode = errorCode || 10001
+        this.msg = msg || '资源已存在'
+    }
+}
+
 class NotFound extends HttpException {
     constructor(msg, errorCode) {
         super()
@@ -53,11 +62,32 @@ class Forbbiden extends HttpException {
     }
 }
 
+class LikeError extends HttpException {
+    constructor(msg, errorCode) {
+        super()
+        this.code = 400
+        this.errorCode = errorCode || 20001
+        this.msg = msg || '你已经点过赞了'
+    }
+}
+
+class DislikeError extends HttpException {
+    constructor(msg, errorCode) {
+        super()
+        this.code = 400
+        this.errorCode = errorCode || 20002
+        this.msg = msg || '你已取消点赞'
+    }
+}
+
 module.exports = {
     HttpException,
     ParameterException,
     Success,
+    HasError,
     NotFound,
     AuthFailed,
-    Forbbiden
+    Forbbiden,
+    LikeError,
+    DislikeError
 }

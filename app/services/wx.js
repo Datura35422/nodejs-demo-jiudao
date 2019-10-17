@@ -5,7 +5,7 @@ const { Auth } = require('../../middlewares/auth')
 const { generateToken } = require('../../core/util')
 
 class WXManager {
-    static  async codeToToken(code) {
+    static async codeToToken(code) {
         const url = util.format(global.config.wx.loginUrl,
             global.config.wx.appId,
             global.config.wx.appSecret,
@@ -16,7 +16,7 @@ class WXManager {
             throw new global.errs.AuthFailed('openid获取失败')
         }
         if (!result.data.openid && result.data.errcode !== 0) {
-            throw new global.errs.AuthFailed( result.data )
+            throw new global.errs.AuthFailed(result.data)
         }
 
         let user = await User.getUserByOpenid(result.data.openid)

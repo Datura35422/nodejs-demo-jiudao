@@ -22,7 +22,6 @@ router.post('/', async (ctx) => {
             break
         default:
             throw new ParameterException('没有相应的处理函数')
-            break
     }
     ctx.body = {
         token
@@ -34,7 +33,7 @@ router.post('/verify', async (ctx) => {
     const v = await new NotEmptyValidator().validate(ctx)
     const result = Auth.verifyToken(v.get('body.token'))
     ctx.body = {
-        result
+        is_valide: result
     }
 })
 
