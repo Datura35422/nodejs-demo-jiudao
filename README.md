@@ -52,7 +52,32 @@
 └── package.json             项目的package配置
 ```
 
+#### 项目搭建
+
+```shell
+npm init // 初始化项目目录
+npm i koa // 安装koa框架
+npm i nodemon -g // 动态编译
+```
+
+#### 项目模块
+
+1. `koa-bodyparser`: 简化获取post数据流程
+2. `koa-router`: 路由导航、东莞太路由及其获取参数
+3. `sequelize`: ORM(对象关系映射)
+4. `mysql2`: 数据库连接插件
+5. `basic-auth`、`jsonwebtoken`: token令牌
+6. `validator`: 参数验证
+7. `require-directory`: 路由自动加载
+8. `npm-check`: 检查依赖包是否有更新、错误以及不在使用的
+9. `module-alias`: 别名配置
+10. `bcryptjs`: 加密解密
+11. `lodash`: 工具库
+12. `axios`: 发送请求
+13. `koa-static`: 访问静态资源
+
 #### 项目学习
+
 1. 如果第一次接触koa2框架，可以先试运行test目录下的文件，初步了解框架运行机制。
 2. 其他文件是项目实战中的文件，后端项目对应的前端项目是`wechat-applet-demo-jiudao`，对该前端项目做了适配，但是数据库中的图片数据不是项目中的静态资源，而是旧岛小程序课程中的图片链接。
 3. 课程笔记待补。。。
