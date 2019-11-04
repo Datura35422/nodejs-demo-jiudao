@@ -16,8 +16,6 @@ router.get('/hot_list', new Auth().m, async ctx => {
 
 router.get('/:id/detail', new Auth().m, async ctx => {
     const v = await new PositiveIntegerValidator().validate(ctx)
-    // const book = new Book(v.get('path.id'))
-    // ctx.body = await book.detail()
     const book = await Book.getDetail(v.get('path.id'))
     ctx.body = book
 })
