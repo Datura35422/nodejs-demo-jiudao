@@ -63,7 +63,7 @@ npm i nodemon -g // 动态编译
 #### 项目模块
 
 1. `koa-bodyparser`: 简化获取post数据流程
-2. `koa-router`: 路由导航、东莞太路由及其获取参数
+2. `koa-router`: 路由导航、动态路由及其获取参数
 3. `sequelize`: ORM(对象关系映射)
 4. `mysql2`: 数据库连接插件
 5. `basic-auth`、`jsonwebtoken`: token令牌
