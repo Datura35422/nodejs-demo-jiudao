@@ -63,7 +63,7 @@ npm i nodemon -g // 动态编译
 #### 项目模块
 
 1. `koa-bodyparser`: 简化获取post数据流程
-2. `koa-router`: 路由导航、东莞太路由及其获取参数
+2. `koa-router`: 路由导航、动态路由及其获取参数
 3. `sequelize`: ORM(对象关系映射)
 4. `mysql2`: 数据库连接插件
 5. `basic-auth`、`jsonwebtoken`: token令牌
@@ -80,6 +80,8 @@ npm i nodemon -g // 动态编译
 
 1. 如果第一次接触koa2框架，可以先试运行test目录下的文件，初步了解框架运行机制。
 2. 其他文件是项目实战中的文件，后端项目对应的前端项目是`wechat-applet-demo-jiudao`，对该前端项目做了适配，但是数据库中的图片数据不是项目中的静态资源，而是旧岛小程序课程中的图片链接。
+
+
 
 #### 课堂笔记
 
@@ -280,6 +282,4 @@ npm i nodemon -g // 动态编译
     持久换源：npm config set registry https://registry.npm.taobao.org
 
     promise不是语法糖，是一种规范
-
-    
 
