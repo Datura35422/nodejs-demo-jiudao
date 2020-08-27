@@ -58,6 +58,9 @@
 npm init // 初始化项目目录
 npm i koa // 安装koa框架
 npm i nodemon -g // 动态编译
+
+// 启动项目
+nodemon app.js
 ```
 
 #### 项目模块

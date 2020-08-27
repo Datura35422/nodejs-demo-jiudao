@@ -2,6 +2,10 @@ const Koa = require('koa')
 const app = new Koa()
 // 测试 url：http://localhost:3000/page/user?a=1&b=2
 app.use(async (ctx) => {
+    const address = ctx.req.headers['x-forwarded-for'] || // 判断是否有反向代理 IP 需要nginx配置
+                    ctx.req.connection.remoteAddress || // 判断 connection 的远程 IP
+                    ctx.socket.remoteAddress // 判断后端的 socket 的 IP socket对象
+    console.log(ctx.req.connection)
     let url = ctx.url
     let params = ctx.params
     // 从上下文的request对象中获取
@@ -19,7 +23,8 @@ app.use(async (ctx) => {
         req_query,
         req_querystring,
         ctx_query,
-        ctx_querystring
+        ctx_querystring,
+        address
     }
 })
 
